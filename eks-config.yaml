@@ -1,0 +1,16 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: eks-ubuntu-cluster
+  region: us-east-2
+nodeGroups:
+  - name: ng-1
+    instanceType: c5a.xlarge
+    amiFamily: "Ubuntu2004"
+    desiredCapacity: 2
+    volumeSize: 80
+    ssh:
+      allow: true
+    preBootstrapCommands:
+      - "sudo apt install linux-headers-$(uname -r)"
+)

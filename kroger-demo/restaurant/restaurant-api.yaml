@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: restaurant-api
+    env: development
+  name: restaurant-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: restaurant-api
+  template:
+    metadata:
+      labels:
+        app: restaurant-api
+    spec:
+      containers:
+      - image: webage.azurecr.io/restaurant-api:latest
+        name: restaurant-api
+        envFrom:
+        - secretRef:
+            name: web-secret
+        ports:
+        - containerPort: 9001

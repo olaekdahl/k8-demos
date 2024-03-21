@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: restaurant-config
+  labels:
+    app: restaurant-web
+    tier: web-fe
+data:
+  RESTAURANT_LIST_SERVICE_URL: "http://restaurant-api-service.default.svc.cluster.local:9001/restaurants"

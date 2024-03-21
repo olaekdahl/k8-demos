@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: restaurant-web
+    env: development
+  name: restaurant-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: restaurant-web
+  template:
+    metadata:
+      labels:
+        app: restaurant-web
+    spec:
+      containers:
+      - image: olaekdahl/restaurant-web:1.0
+        # env:
+        # - name: RESTAURANT_LIST_SERVICE_URL
+        #   value: "http://10.100.161.85:9001/restaurants"
+        envFrom:
+          - configMapRef:
+              name: restaurant-config
+        name: restaurant-web
+        resources:
+          limits:
+            cpu: 200m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        ports:
+        - containerPort: 9000

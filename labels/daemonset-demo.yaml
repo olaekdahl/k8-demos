@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: ds-demo
+  name: ds-demo
+spec:
+  # strategy: Recreate
+  selector:
+    matchLabels:
+      app: dev-web
+  template:
+    metadata:
+      labels:
+        app: dev-web
+    spec:
+      nodeSelector:
+        logging_allow: "true"
+      containers:
+      - image: nginx
+        name: nginx

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: restaurant-web
+  name: restaurant-web-service
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    app: restaurant-web
+  type: ClusterIP #| NodePort | LoadBalancer | None
+  # kubectl create service nodeport restaurant-web --tcp=80:9000 --node-port=30000

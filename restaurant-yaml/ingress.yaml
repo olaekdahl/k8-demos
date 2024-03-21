@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ing-01
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: restaurant-web-service
+            port:
+              number: 80
+        path: /
+        pathType: Exact

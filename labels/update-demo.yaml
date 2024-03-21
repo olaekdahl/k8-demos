@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dev-web
+  name: dev-web
+spec:
+  replicas: 10
+  # strategy: Recreate
+  selector:
+    matchLabels:
+      app: dev-web
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: dev-web
+    spec:
+      containers:
+      - image: nginx
+        name: nginx

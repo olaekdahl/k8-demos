@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    env: dev
+    tier: frontend
+  name: nginx1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+
+
+# kubectl get deployments.apps --show-labels
+# kubectl get deployments -l env=dev
+# kubectl get deployments -l env!=dev
+# kubectl get pods -l 'environment in (production),tier notin (frontend)'
